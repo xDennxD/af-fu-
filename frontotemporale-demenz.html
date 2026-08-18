@@ -1,0 +1,1070 @@
+<title>Frontotemporale Demenz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+  :root {
+    --paper:      #E9EDEF;
+    --surface:    #FFFFFF;
+    --sunk:       #DDE3E6;
+    --rule:       #C3CDD2;
+    --rule-soft:  #D8E0E3;
+    --ink:        #14202A;
+    --ink-soft:   #566873;
+    --frontal:    #C2571C;
+    --frontal-bg: #F7EAE0;
+    --temporal:   #16696F;
+    --temporal-bg:#E1EFEF;
+    --alert:      #98182E;
+    --alert-bg:   #F8E6E9;
+    --brain:      #C8D2D7;
+    --brain-line: #A6B4BB;
+
+    --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+    --measure: 68ch;
+    --wide: 1060px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0E161C;
+      --surface:    #17232C;
+      --sunk:       #1D2B35;
+      --rule:       #2E3F4B;
+      --rule-soft:  #24333D;
+      --ink:        #E2E9EC;
+      --ink-soft:   #93A5AF;
+      --frontal:    #E8925A;
+      --frontal-bg: #2E2018;
+      --temporal:   #58BCC1;
+      --temporal-bg:#122A2C;
+      --alert:      #F0879A;
+      --alert-bg:   #2E181D;
+      --brain:      #2A3A45;
+      --brain-line: #43596A;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0E161C;
+    --surface:    #17232C;
+    --sunk:       #1D2B35;
+    --rule:       #2E3F4B;
+    --rule-soft:  #24333D;
+    --ink:        #E2E9EC;
+    --ink-soft:   #93A5AF;
+    --frontal:    #E8925A;
+    --frontal-bg: #2E2018;
+    --temporal:   #58BCC1;
+    --temporal-bg:#122A2C;
+    --alert:      #F0879A;
+    --alert-bg:   #2E181D;
+    --brain:      #2A3A45;
+    --brain-line: #43596A;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 0 clamp(18px, 5vw, 56px) 96px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(46px, 6vw, 76px);
+  }
+
+  /* ---------- shared type ---------- */
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .19em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -.015em;
+  }
+
+  h3 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    letter-spacing: -.005em;
+  }
+
+  p { margin: 0; max-width: var(--measure); }
+
+  strong { font-weight: 600; }
+
+  .lead {
+    font-size: 1.16rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- header ---------- */
+
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    padding: clamp(40px, 7vw, 76px) 0 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .masthead h1 {
+    font-size: clamp(2.6rem, 7.4vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: -.035em;
+  }
+
+  .masthead .lead { max-width: 58ch; }
+
+  .aka {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    letter-spacing: .02em;
+  }
+
+  /* ---------- key figures ---------- */
+
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .figure {
+    background: var(--surface);
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .figure .val {
+    font-family: var(--font-display);
+    font-size: 1.72rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .figure .key {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .figure .note { font-size: .88rem; color: var(--ink-soft); line-height: 1.45; }
+
+  /* ---------- anatomy plate ---------- */
+
+  .plate {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.15fr) minmax(260px, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: clamp(22px, 3.4vw, 38px);
+  }
+
+  @media (max-width: 720px) {
+    .plate { grid-template-columns: 1fr; }
+  }
+
+  .plate figure { margin: 0; }
+
+  .plate svg { width: 100%; height: auto; display: block; }
+
+  .cerebrum   { fill: var(--brain); }
+  .lobe-front { fill: var(--frontal); }
+  .lobe-temp  { fill: var(--temporal); }
+  .fissure    { fill: none; stroke: var(--surface); stroke-width: 5; stroke-linecap: round; }
+  .sulcus     { fill: none; stroke: var(--brain-line); stroke-width: 2.4; stroke-linecap: round; opacity: .75; }
+  .outline    { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; }
+  .lobe-label {
+    fill: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .14em;
+  }
+
+  .caption {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+
+  .keys { display: flex; flex-direction: column; gap: 20px; }
+
+  .key-item {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .swatch { width: 14px; height: 14px; margin-top: 6px; border-radius: 2px; }
+  .swatch.f { background: var(--frontal); }
+  .swatch.t { background: var(--temporal); }
+
+  .key-item h3 { margin-bottom: 2px; }
+  .key-item .role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .key-item.f .role { color: var(--frontal); }
+  .key-item.t .role { color: var(--temporal); }
+  .key-item p { font-size: .96rem; color: var(--ink-soft); }
+
+  /* ---------- thesis ---------- */
+
+  .thesis {
+    border-left: 4px solid var(--frontal);
+    padding: 4px 0 4px 26px;
+  }
+
+  .thesis p {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3.2vw, 1.72rem);
+    font-weight: 500;
+    line-height: 1.32;
+    letter-spacing: -.02em;
+    max-width: 26ch;
+  }
+
+  .thesis .src {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 22px; }
+
+  .sec-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+  }
+
+  /* ---------- cards ---------- */
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--ink);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card.f { border-top-color: var(--frontal); }
+  .card.t { border-top-color: var(--temporal); }
+
+  .card .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .card.f .tag { color: var(--frontal); }
+  .card.t .tag { color: var(--temporal); }
+
+  .card p { font-size: .96rem; }
+  .card .share {
+    font-family: var(--font-mono);
+    font-size: .84rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 10px;
+    margin-top: auto;
+  }
+
+  /* ---------- criteria ---------- */
+
+  .criteria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .crit {
+    background: var(--surface);
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .crit .mark {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--frontal);
+    border: 1px solid var(--frontal);
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+
+  .crit h3 { margin-bottom: 5px; }
+  .crit p { font-size: .94rem; color: var(--ink-soft); }
+
+  .rule-note {
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    font-size: .95rem;
+  }
+  .rule-note strong { font-family: var(--font-display); }
+
+  /* ---------- table ---------- */
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+    font-size: .95rem;
+  }
+
+  thead th {
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px 18px;
+    border-bottom: 2px solid var(--ink);
+    vertical-align: bottom;
+  }
+
+  thead th:nth-child(2) { color: var(--frontal); }
+
+  thead th .sub {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  tbody td, tbody th {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+    text-align: left;
+  }
+
+  tbody th {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: .84rem;
+    letter-spacing: .02em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: none; }
+  tbody tr:nth-child(even) td, tbody tr:nth-child(even) th { background: var(--sunk); }
+
+  /* ---------- lists ---------- */
+
+  .stack { display: flex; flex-direction: column; gap: 26px; }
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 24px clamp(20px, 3vw, 30px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .block h3 { display: flex; align-items: baseline; gap: 12px; }
+
+  .block h3 .n {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  ul.clean { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+
+  ul.clean > li {
+    position: relative;
+    padding-left: 20px;
+    max-width: var(--measure);
+    font-size: .98rem;
+  }
+
+  ul.clean > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 7px;
+    height: 2px;
+    background: var(--ink-soft);
+  }
+
+  .h { font-weight: 600; }
+
+  /* ---------- callouts ---------- */
+
+  .callout {
+    border-left: 4px solid var(--alert);
+    background: var(--alert-bg);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .callout .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--alert);
+  }
+
+  .callout p { font-size: .96rem; }
+
+  .callout.neutral {
+    border-left-color: var(--temporal);
+    background: var(--temporal-bg);
+  }
+  .callout.neutral .lbl { color: var(--temporal); }
+
+  /* ---------- exam ---------- */
+
+  .exam {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(26px, 4vw, 42px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .exam h2 { color: var(--paper); }
+  .exam .eyebrow { color: var(--brain-line); }
+
+  .exam ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 32px;
+  }
+
+  .exam ol li {
+    border-top: 1px solid var(--brain-line);
+    padding-top: 12px;
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .exam ol li .q {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .exam ol li .a { color: var(--brain); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: .88rem;
+    color: var(--ink-soft);
+  }
+
+  footer .eyebrow { margin-bottom: 4px; }
+  footer p { max-width: 80ch; }
+  footer ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: color .15s ease; }
+  }
+
+  a { color: var(--temporal); }
+  a:focus-visible { outline: 2px solid var(--frontal); outline-offset: 3px; }
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <p class="eyebrow">Neurologie &middot; Erkrankungen der Psyche &middot; Demenzformen</p>
+    <h1>Frontotemporale Demenz</h1>
+    <p class="lead">Die Demenz, die nicht mit Vergesslichkeit beginnt, sondern mit einem Menschen, der sich verändert. Kompakt für Ausbildung, Praxis und Examen.</p>
+    <p class="aka">FTD &middot; FTLD (frontotemporale Lobärdegeneration) &middot; historisch: Morbus Pick</p>
+  </header>
+
+  <div class="figures">
+    <div class="figure">
+      <span class="key">Anteil aller Demenzen</span>
+      <span class="val">3&ndash;10 %</span>
+      <span class="note">selten insgesamt &mdash; aber eine der häufigsten Demenzursachen vor dem 65. Lebensjahr</span>
+    </div>
+    <div class="figure">
+      <span class="key">Erkrankungsgipfel</span>
+      <span class="val">50.&ndash;60. Lj.</span>
+      <span class="note">Betroffene stehen meist mitten im Berufsleben und in der Familie</span>
+    </div>
+    <div class="figure">
+      <span class="key">Familiäre Häufung</span>
+      <span class="val">bis 40 %</span>
+      <span class="note">10&ndash;20 % autosomal-dominant; Gene C9orf72, MAPT, GRN</span>
+    </div>
+    <div class="figure">
+      <span class="key">Mittlere Verlaufsdauer</span>
+      <span class="val">6&ndash;12 J.</span>
+      <span class="note">deutlich kürzer bei Kombination mit ALS (ca. 2&ndash;3 Jahre)</span>
+    </div>
+  </div>
+
+  <div class="plate">
+    <figure>
+      <svg viewBox="0 0 440 320" role="img" aria-labelledby="brainTitle brainDesc">
+        <title id="brainTitle">Schematische Seitenansicht des Gehirns</title>
+        <desc id="brainDesc">Frontallappen und Temporallappen sind farbig hervorgehoben; sie sind bei der frontotemporalen Demenz zuerst und am stärksten von der Atrophie betroffen.</desc>
+
+        <defs>
+          <clipPath id="cerebrumClip">
+            <path d="M 46,158 C 48,106 84,62 138,48 C 186,36 244,38 290,54 C 348,74 386,112 386,154 C 386,184 372,204 344,214 C 310,226 266,234 216,236 C 164,238 116,232 84,212 C 58,196 44,180 46,158 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- Kleinhirn und Hirnstamm (hinter dem Großhirn) -->
+        <ellipse class="cerebrum" cx="330" cy="252" rx="52" ry="34"/>
+        <ellipse class="outline" cx="330" cy="252" rx="52" ry="34"/>
+        <path class="cerebrum" d="M 244,214 L 280,214 C 278,244 270,272 264,296 L 230,296 C 240,272 246,244 244,214 Z"/>
+        <path class="outline" d="M 244,214 L 280,214 C 278,244 270,272 264,296 L 230,296 C 240,272 246,244 244,214 Z"/>
+
+        <!-- Großhirn -->
+        <path class="cerebrum" d="M 46,158 C 48,106 84,62 138,48 C 186,36 244,38 290,54 C 348,74 386,112 386,154 C 386,184 372,204 344,214 C 310,226 266,234 216,236 C 164,238 116,232 84,212 C 58,196 44,180 46,158 Z"/>
+
+        <g clip-path="url(#cerebrumClip)">
+          <path class="lobe-front" d="M 0,0 L 262,0 L 196,176 L 0,190 Z"/>
+          <path class="lobe-temp"  d="M 0,182 L 292,142 L 300,320 L 0,320 Z"/>
+
+          <!-- Sulcus centralis: Grenze Frontal- / Parietallappen -->
+          <path class="fissure" d="M 244,44 C 232,86 214,132 198,174"/>
+          <!-- Sulcus lateralis (Sylvische Furche): Grenze zum Temporallappen -->
+          <path class="fissure" d="M 44,174 C 122,198 212,180 292,142"/>
+
+          <path class="sulcus" d="M 302,60 C 296,100 292,136 296,168"/>
+          <path class="sulcus" d="M 120,72 C 140,96 148,124 144,152"/>
+          <path class="sulcus" d="M 336,120 C 348,142 352,166 348,190"/>
+          <path class="sulcus" d="M 130,196 C 168,206 208,202 244,190"/>
+
+          <text class="lobe-label" x="116" y="126" text-anchor="middle">FRONTAL</text>
+          <text class="lobe-label" x="152" y="212" text-anchor="middle">TEMPORAL</text>
+        </g>
+
+        <path class="outline" d="M 46,158 C 48,106 84,62 138,48 C 186,36 244,38 290,54 C 348,74 386,112 386,154 C 386,184 372,204 344,214 C 310,226 266,234 216,236 C 164,238 116,232 84,212 C 58,196 44,180 46,158 Z"/>
+      </svg>
+      <p class="caption">Schematisch &middot; Seitenansicht, Stirn links</p>
+    </figure>
+
+    <div class="keys">
+      <div class="key-item f">
+        <span class="swatch f" aria-hidden="true"></span>
+        <div>
+          <span class="role">Frontallappen</span>
+          <h3>Steuert, wer wir im Umgang mit anderen sind</h3>
+          <p>Impulskontrolle, Antrieb, Planen, Empathie, Sozialverhalten. Fällt er aus, verändert sich die Persönlichkeit &mdash; nicht das Gedächtnis.</p>
+        </div>
+      </div>
+      <div class="key-item t">
+        <span class="swatch t" aria-hidden="true"></span>
+        <div>
+          <span class="role">Temporallappen</span>
+          <h3>Speichert Sprache und Wortbedeutung</h3>
+          <p>Wortfindung, Grammatik, Begriffswissen. Fällt er aus, zerfällt die Sprache, während der Betroffene sich sonst lange normal verhält.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="thesis">
+    <p>Bei der FTD geht nicht zuerst das Gedächtnis verloren &mdash; sondern die Persönlichkeit.</p>
+    <p class="src">Der wichtigste Merksatz der ganzen Zusammenfassung</p>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Überblick</p>
+      <h2>Was bei der FTD im Gehirn passiert</h2>
+    </div>
+    <p>Die FTD ist keine einzelne Krankheit, sondern eine <strong>Gruppe neurodegenerativer Erkrankungen</strong> mit einem gemeinsamen Muster: Nervenzellen gehen umschrieben (fokal) im Stirn- und Schläfenlappen zugrunde, während andere Hirnregionen lange verschont bleiben. Deshalb sind die ersten Symptome nicht Gedächtnislücken, sondern Verhalten und Sprache.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">Pathologie</span>
+        <h3>Umschriebene Atrophie</h3>
+        <p>Fortschreitender Nervenzelluntergang im Frontal- und Temporallappen. Im MRT wird das als deutliche Volumenminderung genau dieser Regionen sichtbar.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Eiweißablagerungen</span>
+        <h3>Tau, TDP-43 oder FUS</h3>
+        <p>Fehlgefaltete Proteine lagern sich in den Nervenzellen ab. Die Untergruppen heißen danach FTLD-Tau, FTLD-TDP und FTLD-FUS.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Abgrenzung</span>
+        <h3>Kein Beta-Amyloid</h3>
+        <p>Anders als bei der Alzheimer-Demenz fehlen die typischen Beta-Amyloid-Plaques. Genau darauf beruht die Liquordiagnostik zur Unterscheidung.</p>
+      </div>
+    </div>
+    <div class="callout neutral">
+      <span class="lbl">Überlappungssyndrome</span>
+      <p>Die FTD kann gemeinsam mit einer <strong>ALS (amyotrophe Lateralsklerose)</strong> auftreten sowie mit atypischen Parkinson-Syndromen (PSP, CBD). Bei jedem FTD-Patienten deshalb gezielt auf Muskelschwäche, Faszikulationen, Schluckstörungen und Sprechstörungen achten &mdash; sie verkürzen die Prognose erheblich.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Varianten</p>
+      <h2>Drei Erscheinungsbilder &mdash; je nachdem, wo die Atrophie beginnt</h2>
+    </div>
+    <div class="cards">
+      <div class="card f">
+        <span class="tag">bvFTD &middot; Frontal</span>
+        <h3>Verhaltensvariante</h3>
+        <p>Die häufigste Form. Im Vordergrund stehen Enthemmung, Apathie, Empathieverlust und verändertes Essverhalten. Die Sprache bleibt anfangs unauffällig, das Gedächtnis ebenfalls.</p>
+        <p class="share">ca. 60 % aller FTD-Fälle</p>
+      </div>
+      <div class="card t">
+        <span class="tag">svPPA &middot; Temporal</span>
+        <h3>Semantische Demenz</h3>
+        <p>Flüssiges, aber inhaltsleeres Sprechen. Die <span class="h">Wortbedeutung</span> geht verloren: „Was ist eine Gabel?“ kann nicht mehr beantwortet werden, auch der Gegenstand wird nicht erkannt.</p>
+        <p class="share">semantische Variante der PPA</p>
+      </div>
+      <div class="card t">
+        <span class="tag">nfvPPA &middot; Temporal/Frontal</span>
+        <h3>Nichtflüssige Aphasie</h3>
+        <p>Mühsames, stockendes, grammatikalisch fehlerhaftes Sprechen bei erhaltenem Wortverständnis. Betroffene wissen, was sie sagen wollen, bekommen es aber nicht heraus.</p>
+        <p class="share">agrammatische Variante der PPA</p>
+      </div>
+    </div>
+    <div class="rule-note">
+      <strong>PPA</strong> = primär progrediente Aphasie. Bei beiden Sprachvarianten ist die Sprachstörung über mindestens zwei Jahre das <em>einzige</em> führende Symptom &mdash; erst danach kommen Verhaltensauffälligkeiten dazu.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Leitsymptome</p>
+      <h2>Die sechs Kernmerkmale der Verhaltensvariante</h2>
+    </div>
+    <p>Nach den international gebräuchlichen Diagnosekriterien (Rascovsky et al. 2011) müssen <strong>mindestens drei dieser sechs Merkmale</strong> vorliegen und über die Zeit fortschreiten. Genau diese sechs sind die prüfungsrelevante Liste.</p>
+    <div class="criteria">
+      <div class="crit">
+        <span class="mark" aria-hidden="true">A</span>
+        <div>
+          <h3>Enthemmung</h3>
+          <p>Sozial unangemessenes Verhalten, Taktlosigkeit, Distanzlosigkeit, Impulskäufe, sexuelle Anzüglichkeiten, Verlust von Anstandsregeln.</p>
+        </div>
+      </div>
+      <div class="crit">
+        <span class="mark" aria-hidden="true">B</span>
+        <div>
+          <h3>Apathie und Antriebsverlust</h3>
+          <p>Interessenverlust, Initiativlosigkeit, Rückzug. Wird häufig als Depression fehlgedeutet &mdash; es fehlt aber der Leidensdruck.</p>
+        </div>
+      </div>
+      <div class="crit">
+        <span class="mark" aria-hidden="true">C</span>
+        <div>
+          <h3>Verlust von Empathie</h3>
+          <p>Gleichgültigkeit gegenüber Gefühlen anderer, fehlende Wärme, keine Reaktion auf Kummer von Angehörigen. Für Familien am schwersten auszuhalten.</p>
+        </div>
+      </div>
+      <div class="crit">
+        <span class="mark" aria-hidden="true">D</span>
+        <div>
+          <h3>Stereotypes, zwanghaftes Verhalten</h3>
+          <p>Rituale, feste Wege und Zeiten, Sammeln, Klopfen, Nesteln, ständiges Wiederholen derselben Sätze (Perseveration).</p>
+        </div>
+      </div>
+      <div class="crit">
+        <span class="mark" aria-hidden="true">E</span>
+        <div>
+          <h3>Hyperoralität</h3>
+          <p>Heißhunger, besonders auf Süßes, Essen in großer Menge und Geschwindigkeit, Rauchen und Trinken im Übermaß, orales Erkunden nicht essbarer Dinge.</p>
+        </div>
+      </div>
+      <div class="crit">
+        <span class="mark" aria-hidden="true">F</span>
+        <div>
+          <h3>Exekutive Störungen</h3>
+          <p>Planen, Organisieren, Umstellen und Problemlösen misslingen &mdash; bei zunächst <strong>erhaltenem Gedächtnis</strong> und erhaltener räumlicher Orientierung.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <span class="lbl">Achtung &middot; typische Falle</span>
+      <p>Die Betroffenen haben <strong>keine Krankheitseinsicht</strong>. Sie schildern selbst keine Beschwerden und wirken im Gespräch oft erstaunlich unauffällig. Ohne <strong>Fremdanamnese durch Angehörige</strong> wird die FTD regelmäßig übersehen oder als Depression, Manie, Burnout oder „Midlife-Crisis“ fehlgedeutet &mdash; bis zur richtigen Diagnose vergehen häufig mehrere Jahre.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Differenzialdiagnose</p>
+      <h2>FTD gegen Alzheimer-Demenz abgrenzen</h2>
+    </div>
+    <p>Diese Gegenüberstellung ist der Kern jeder Prüfungsfrage zum Thema. Merkhilfe: Alzheimer nimmt zuerst das <em>Wissen</em>, die FTD zuerst das <em>Wesen</em>.</p>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Vergleich frontotemporale Demenz und Alzheimer-Demenz</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sub">Merkmal</span>Kriterium</th>
+            <th scope="col"><span class="sub">Wesen zuerst</span>Frontotemporale Demenz</th>
+            <th scope="col"><span class="sub">Wissen zuerst</span>Alzheimer-Demenz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Erkrankungsalter</th>
+            <td>meist 50&ndash;60 Jahre, oft im Berufsleben</td>
+            <td>überwiegend nach dem 65. Lebensjahr</td>
+          </tr>
+          <tr>
+            <th scope="row">Erstsymptom</th>
+            <td>Persönlichkeits- und Verhaltensänderung oder Sprachstörung</td>
+            <td>schleichende Vergesslichkeit für Neues</td>
+          </tr>
+          <tr>
+            <th scope="row">Gedächtnis</th>
+            <td>lange weitgehend erhalten</td>
+            <td>früh und führend gestört</td>
+          </tr>
+          <tr>
+            <th scope="row">Orientierung</th>
+            <td>zeitlich/örtlich lange erhalten</td>
+            <td>früh gestört</td>
+          </tr>
+          <tr>
+            <th scope="row">Krankheitseinsicht</th>
+            <td>fehlt von Beginn an</td>
+            <td>anfangs vorhanden, oft mit depressiver Reaktion</td>
+          </tr>
+          <tr>
+            <th scope="row">Sozialverhalten</th>
+            <td>früh und massiv verändert (Enthemmung, Empathieverlust)</td>
+            <td>lange erhalten, Fassade bleibt bestehen</td>
+          </tr>
+          <tr>
+            <th scope="row">Atrophiemuster</th>
+            <td>frontal und temporal umschrieben</td>
+            <td>temporoparietal, besonders Hippocampus</td>
+          </tr>
+          <tr>
+            <th scope="row">MMST</th>
+            <td>lange unauffällig &mdash; ungeeignet zum Screening</td>
+            <td>früh auffällig, gut screeningtauglich</td>
+          </tr>
+          <tr>
+            <th scope="row">Liquor</th>
+            <td>Beta-Amyloid und Tau meist unauffällig</td>
+            <td>Beta-Amyloid&nbsp;42 erniedrigt, Tau erhöht</td>
+          </tr>
+          <tr>
+            <th scope="row">Antidementiva</th>
+            <td>nicht wirksam, nicht empfohlen</td>
+            <td>AChE-Hemmer bzw. Memantin je nach Stadium</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Diagnostik</p>
+      <h2>Wie die Diagnose gesichert wird</h2>
+    </div>
+    <div class="stack">
+      <div class="block">
+        <h3><span class="n">Basis</span>Anamnese und Fremdanamnese</h3>
+        <ul class="clean">
+          <li><span class="h">Fremdanamnese ist das wichtigste Instrument.</span> Angehörige beschreiben den Wandel („Er ist nicht mehr derselbe Mensch“), der Betroffene selbst nicht.</li>
+          <li>Gezielt fragen nach: Taktlosigkeiten, Rückzug, neuen Ritualen, Heißhunger auf Süßes, Fehlern am Arbeitsplatz, Verkehrsverstößen, finanziellen Fehlentscheidungen.</li>
+          <li>Zeitlicher Verlauf: schleichender Beginn, stetige Verschlechterung über Monate bis Jahre.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Testung</span>Neuropsychologie</h3>
+        <ul class="clean">
+          <li><span class="h">MMST und Uhren-Zeichen-Test reichen nicht.</span> Sie prüfen vor allem Gedächtnis und Visuokonstruktion &mdash; also genau das, was bei der FTD lange intakt bleibt.</li>
+          <li>Geeignet sind Tests der Frontalhirnfunktion, z.&nbsp;B. die <span class="h">FAB (Frontal Assessment Battery)</span>, Wortflüssigkeits-, Stroop- und Trail-Making-Aufgaben.</li>
+          <li>Bei Sprachvarianten zusätzlich logopädische Sprachdiagnostik (Benennen, Wortverständnis, Grammatik).</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Apparativ</span>Bildgebung und Labor</h3>
+        <ul class="clean">
+          <li><span class="h">MRT:</span> frontal und temporal betonte Atrophie, häufig seitenbetont.</li>
+          <li><span class="h">FDG-PET:</span> verminderter Zuckerstoffwechsel frontotemporal &mdash; oft schon auffällig, bevor die Atrophie im MRT sichtbar ist.</li>
+          <li><span class="h">Liquordiagnostik:</span> dient primär dem Ausschluss einer Alzheimer-Demenz und entzündlicher Ursachen.</li>
+          <li><span class="h">Labor:</span> Ausschluss behandelbarer Ursachen &mdash; Schilddrüse, Vitamin B12/Folsäure, Elektrolyte, Leber- und Nierenwerte, Entzündungsparameter.</li>
+          <li><span class="h">Humangenetische Beratung</span> bei positiver Familienanamnese, stets nur mit Aufklärung und Einwilligung.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <span class="lbl">Immer ausschließen</span>
+        <p>Vor der Diagnose FTD sind <strong>Delir, Depression, bipolare Störung, Schizophrenie und Suchterkrankungen</strong> abzugrenzen. Umgekehrt gilt: Erhält ein Mensch um die 55 erstmals im Leben eine psychiatrische Diagnose und verhält sich zunehmend sozial unangemessen, gehört die FTD in die Differenzialdiagnose.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Therapie</p>
+      <h2>Behandelbar sind die Symptome, nicht die Ursache</h2>
+    </div>
+    <div class="callout">
+      <span class="lbl">Kontraindikation &middot; hoch prüfungsrelevant</span>
+      <p><strong>Acetylcholinesterasehemmer (Donepezil, Rivastigmin, Galantamin) und Memantin sind bei der FTD nicht wirksam und werden nicht empfohlen.</strong> Sie können Verhaltenssymptome sogar verstärken. Was bei Alzheimer richtig ist, ist hier falsch &mdash; deshalb muss die Demenzform benannt sein, nicht nur „Demenz“.</p>
+    </div>
+    <div class="stack">
+      <div class="block">
+        <h3><span class="n">Medikamentös</span>Zurückhaltend und symptomorientiert</h3>
+        <ul class="clean">
+          <li><span class="h">SSRI</span> (z.&nbsp;B. Citalopram, Sertralin) oder Trazodon können Enthemmung, Zwangsverhalten, Reizbarkeit und Hyperoralität abmildern.</li>
+          <li><span class="h">Antipsychotika nur als letzte Option</span>, niedrig dosiert und zeitlich befristet: FTD-Betroffene reagieren besonders empfindlich mit extrapyramidalmotorischen Nebenwirkungen.</li>
+          <li>Keine Dauerverordnung ohne regelmäßige Überprüfung von Indikation, Wirkung und Nebenwirkungen.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Nicht medikamentös</span>Das ist die eigentliche Therapie</h3>
+        <ul class="clean">
+          <li><span class="h">Logopädie</span> bei beiden Sprachvarianten: Erhalt der Kommunikation, frühzeitige Einführung unterstützter Kommunikation (Bildkarten, Symboltafeln), später Dysphagiemanagement.</li>
+          <li><span class="h">Ergotherapie</span> zur Alltagsstrukturierung und zum Erhalt von Handlungsabläufen.</li>
+          <li><span class="h">Physiotherapie</span> zum Erhalt von Mobilität und Gleichgewicht, besonders bei Parkinson-Überlappung.</li>
+          <li><span class="h">Verhaltensmanagement:</span> Auslöser identifizieren, Umgebung anpassen, Reize reduzieren &mdash; wirksamer als jedes Medikament.</li>
+          <li><span class="h">Angehörigenschulung und Selbsthilfe</span> von Anfang an, nicht erst in der Krise.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Pflege</p>
+      <h2>Pflegerische Schwerpunkte</h2>
+    </div>
+    <p>Der pflegerische Grundsatz lautet: <strong>nicht konfrontieren, sondern umlenken</strong>. Ermahnen, Diskutieren und Appelle an die Einsicht scheitern zwangsläufig, weil genau die Hirnregion ausgefallen ist, an die appelliert wird.</p>
+    <div class="stack">
+      <div class="block">
+        <h3><span class="n">Kommunikation</span>Klar, kurz, wertfrei</h3>
+        <ul class="clean">
+          <li>Kurze, eindeutige Sätze; <span class="h">eine Aufforderung nach der anderen</span>, nicht mehrere gleichzeitig.</li>
+          <li>Nicht moralisieren, nicht beschämen, keine Schuldzuweisung. Das Verhalten ist Symptom, nicht Absicht.</li>
+          <li>Bei Enthemmung: ruhig bleiben, Situation entschärfen, ablenken &mdash; ein bekanntes Ritual, ein Getränk, ein Ortswechsel.</li>
+          <li>Auf eigene Mimik, Gestik und Körperhaltung achten; sie müssen zum Gesagten passen.</li>
+          <li>Bei Sprachvarianten frühzeitig auf nonverbale Wege umstellen und Zeit zum Antworten lassen.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Umgebung</span>Struktur statt Diskussion</h3>
+        <ul class="clean">
+          <li><span class="h">Feste Tagesstruktur</span> mit immer gleichen Zeiten und Abläufen; Rituale nutzen statt sie zu bekämpfen.</li>
+          <li>Möglichst <span class="h">konstante Bezugspflegende</span>, häufiger Wechsel der Ansprechpartner ist zu vermeiden.</li>
+          <li>Reizarme Umgebung: Lärm, Trubel und Unterbrechungen reduzieren.</li>
+          <li>Auslöser problematischen Verhaltens dokumentieren (Verhaltensprotokoll: Was war vorher? Wer war da? Wann?) und gezielt ausschalten.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Ernährung</span>Hyperoralität als Risiko</h3>
+        <ul class="clean">
+          <li><span class="h">Erstickungs- und Aspirationsgefahr</span> durch zu große, zu hastig geschluckte Bissen &mdash; kleine Portionen anreichen, Tempo begleiten, beim Essen nicht allein lassen.</li>
+          <li>Vorräte, Süßigkeiten und nicht essbare Dinge (Reinigungsmittel, Zimmerpflanzen, Zigaretten) sicher verwahren.</li>
+          <li>Regelmäßige <span class="h">Gewichtskontrolle</span>; Gewichtszunahme und Stoffwechselfolgen im Blick behalten.</li>
+          <li>Im Verlauf Umschlag in Dysphagie und Gewichtsverlust &mdash; dann Kostformanpassung, Logopädie, Aspirationsprophylaxe.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Sicherheit</span>Fehlende Einsicht schützt nicht</h3>
+        <ul class="clean">
+          <li>Selbst- und Fremdgefährdung durch Impulsivität, fehlende Gefahreneinschätzung und Weglauftendenz beachten.</li>
+          <li><span class="h">Fahreignung</span> und Umgang mit Geld frühzeitig ansprechen &mdash; Verkehrsunfälle und finanzielle Schäden sind häufige Erstereignisse.</li>
+          <li>Intimsphäre und Würde schützen, wenn distanzloses Verhalten andere Betroffene oder Besucher berührt; betroffene Dritte einfühlsam informieren.</li>
+          <li>Freiheitsentziehende Maßnahmen sind letztes Mittel und nur mit richterlicher Genehmigung zulässig; vorher immer Alternativen ausschöpfen.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3><span class="n">Spätstadium</span>Vom Verhalten zur Grundpflege</h3>
+        <ul class="clean">
+          <li>Zunehmend Mutismus, Dysphagie, Inkontinenz, Rigor und Immobilität &mdash; der Pflegebedarf gleicht sich anderen Demenzen an.</li>
+          <li>Konsequente <span class="h">Prophylaxen</span>: Aspiration, Pneumonie, Dekubitus, Kontraktur, Thrombose, Obstipation, Soor und Parotitis.</li>
+          <li>Aktivierende Pflege so lange wie möglich: nur so viel Unterstützung geben wie nötig, Handlungsschritte anleiten statt abnehmen.</li>
+          <li>Frühzeitig <span class="h">palliative Versorgung</span> und Vorausplanung einbeziehen, solange Wünsche noch geäußert werden können.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Angehörige und Recht</p>
+      <h2>Warum die Belastung hier besonders hoch ist</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">Lebensphase</span>
+        <h3>Mitten im Leben</h3>
+        <p>Betroffene sind oft berufstätig und haben minderjährige Kinder. Es drohen Arbeitsplatzverlust, Einkommenseinbruch und Schulden durch enthemmte Ausgaben.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Emotion</span>
+        <h3>Trauer um einen Lebenden</h3>
+        <p>Der Mensch ist da, aber sein Wesen ist fremd geworden. Empathieverlust wird als persönliche Zurückweisung erlebt &mdash; das erklärt Wut und Schuldgefühle der Angehörigen.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Weg zur Diagnose</span>
+        <h3>Jahre der Fehldeutung</h3>
+        <p>Vorher stehen oft Paarkonflikte, psychiatrische Fehldiagnosen und Vorwürfe. Die Diagnose bringt Entlastung und Erschütterung zugleich.</p>
+      </div>
+    </div>
+    <div class="block">
+      <h3><span class="n">Konkret</span>Was Pflegende anstoßen sollten</h3>
+      <ul class="clean">
+        <li><span class="h">Frühzeitig Vorsorgevollmacht, Betreuungs- und Patientenverfügung</span> anregen, solange Geschäftsfähigkeit besteht. Bei fehlender Vollmacht rechtliche Betreuung über das Betreuungsgericht.</li>
+        <li>Beratung zu <span class="h">Pflegegrad, Entlastungsbetrag, Verhinderungs- und Tagespflege</span>; Antragstellung aktiv unterstützen.</li>
+        <li>Auf spezialisierte <span class="h">Selbsthilfegruppen</span> hinweisen &mdash; Angebote für ältere Demenzkranke passen selten zu einer 55-jährigen Familie.</li>
+        <li>Kinder und Jugendliche einbeziehen und altersgerecht aufklären; sie werden regelmäßig übersehen.</li>
+        <li>Belastung der Hauptpflegeperson regelmäßig erfragen und dokumentieren &mdash; Erschöpfung ist hier die Regel, nicht die Ausnahme.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="exam">
+    <div>
+      <p class="eyebrow">Prüfungswissen</p>
+      <h2>Sechs Fragen, sechs Antworten</h2>
+    </div>
+    <ol>
+      <li>
+        <span class="q">Wodurch unterscheidet sich die FTD im Erstsymptom von der Alzheimer-Demenz?</span>
+        <span class="a">Alzheimer beginnt mit Gedächtnisstörungen, die FTD mit Persönlichkeits- und Verhaltensänderung oder mit einer Sprachstörung.</span>
+      </li>
+      <li>
+        <span class="q">Warum ist der MMST bei Verdacht auf FTD ungeeignet?</span>
+        <span class="a">Er prüft vor allem Gedächtnis und Orientierung &mdash; die bei der FTD lange erhalten bleiben. Nötig sind Frontalhirntests wie die FAB.</span>
+      </li>
+      <li>
+        <span class="q">Nennen Sie drei der sechs Kernmerkmale der bvFTD.</span>
+        <span class="a">Enthemmung, Apathie, Empathieverlust, stereotyp-zwanghaftes Verhalten, Hyperoralität, exekutive Störungen &mdash; drei von sechs genügen für die Diagnose.</span>
+      </li>
+      <li>
+        <span class="q">Welche Medikamentengruppe ist bei der FTD nicht indiziert?</span>
+        <span class="a">Acetylcholinesterasehemmer und Memantin. Sie sind unwirksam und können das Verhalten verschlechtern.</span>
+      </li>
+      <li>
+        <span class="q">Welche akute pflegerische Gefahr geht von der Hyperoralität aus?</span>
+        <span class="a">Aspiration und Ersticken durch hastiges Schlucken großer Bissen, dazu Aufnahme nicht essbarer Substanzen.</span>
+      </li>
+      <li>
+        <span class="q">Wie reagieren Sie auf distanzloses Verhalten gegenüber einer Mitpatientin?</span>
+        <span class="a">Ruhig unterbrechen, Situation räumlich entzerren, umlenken statt ermahnen, Betroffene schützen und informieren, Auslöser dokumentieren.</span>
+      </li>
+    </ol>
+  </section>
+
+  <footer>
+    <div>
+      <p class="eyebrow">Quellen und Hinweis</p>
+      <p>Lernzusammenfassung für die Pflegeausbildung &mdash; kein Ersatz für ärztliche Diagnostik oder eine geltende Leitlinie im Original.</p>
+    </div>
+    <ul>
+      <li>S3-Leitlinie Demenzen, DGPPN und DGN (AWMF-Registernummer 038-013) &mdash; Abschnitte zur frontotemporalen Lobärdegeneration, Diagnostik und Pharmakotherapie.</li>
+      <li>Rascovsky K. et al., Brain 2011 &mdash; internationale Konsensuskriterien der Verhaltensvariante (bvFTD).</li>
+      <li>Gorno-Tempini M.-L. et al., Neurology 2011 &mdash; Klassifikation der primär progredienten Aphasien.</li>
+      <li>I care Pflege, Thieme 2020, Kap. 56 &mdash; Grundlagen Demenz, Orientierungshilfen, psychosoziale Therapieansätze und Kommunikation. Die FTD wird dort nicht als eigene Demenzform geführt; die FTD-Spezifika oben stammen aus den genannten Leitlinien- und Konsensusquellen.</li>
+    </ul>
+  </footer>
+
+</div>
