@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Prozedurale Hochsee in Echtzeit – WebGPU, Three.js und TSL. Fünf Gerstner-Wellen, analytische Normalen, FBM-Kapillardetails, Himmelsmodell und Bloom.">
+<title>Procedural Open Sea — WebGPU / TSL</title>
+<style>
+  :root{
+    --ui-bg: rgba(8, 16, 24, 0.62);
+    --ui-border: rgba(150, 200, 230, 0.22);
+    --ui-fg: #eaf4fb;
+    --ui-fg-dim: #a8c2d4;
+    --ui-accent: #5fd0ff;
+    --ui-radius: 14px;
+    --ui-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #05080c;
+    color: var(--ui-fg);
+    font: 400 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overscroll-behavior: none;
+  }
+
+  body { overflow: hidden; }
+
+  canvas#sea {
+    position: fixed;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;           /* alle Gesten gehen an OrbitControls */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  canvas#sea:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: -4px; }
+
+  /* ---------- Bedienfeld ---------- */
+  .panel {
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    left: max(14px, env(safe-area-inset-left));
+    width: min(310px, calc(100vw - 28px));
+    padding: 14px 16px 12px;
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    z-index: 10;
+  }
+  .panel[hidden] { display: none; }
+
+  .panel h1 {
+    margin: 0 0 2px;
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+  }
+  .panel .sub {
+    margin: 0 0 12px;
+    font-size: 11.5px;
+    color: var(--ui-fg-dim);
+  }
+
+  .field { margin: 0 0 11px; }
+  .field:last-of-type { margin-bottom: 6px; }
+  .field .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .field label { font-size: 12.5px; font-weight: 550; }
+  .field output {
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    color: var(--ui-accent);
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 22px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(95,208,255,.85), rgba(95,208,255,.25));
+  }
+  input[type="range"]::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(95,208,255,.85), rgba(95,208,255,.25));
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; height: 16px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: #eaf4fb;
+    border: 2px solid #2b6d8c;
+    box-shadow: 0 1px 4px rgba(0,0,0,.5);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #eaf4fb;
+    border: 2px solid #2b6d8c;
+  }
+  input[type="range"]:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 3px; border-radius: 4px; }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--ui-border);
+    font-size: 11.5px;
+    color: var(--ui-fg-dim);
+  }
+  .meta strong { color: var(--ui-fg); font-variant-numeric: tabular-nums; }
+
+  button {
+    font: inherit;
+    font-size: 11.5px;
+    color: var(--ui-fg);
+    background: rgba(255,255,255,.07);
+    border: 1px solid var(--ui-border);
+    border-radius: 8px;
+    padding: 4px 9px;
+    cursor: pointer;
+  }
+  button:hover { background: rgba(255,255,255,.14); }
+  button:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+
+  .panel-toggle {
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    left: max(14px, env(safe-area-inset-left));
+    z-index: 11;
+  }
+  .panel-toggle[hidden] { display: none; }
+
+  details.help { margin-top: 8px; font-size: 11.5px; color: var(--ui-fg-dim); }
+  details.help summary { cursor: pointer; }
+  details.help ul { margin: 6px 0 0; padding-left: 18px; }
+  details.help li { margin-bottom: 2px; }
+
+  /* ---------- Overlays ---------- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    text-align: center;
+    background: radial-gradient(120% 90% at 50% 30%, #0d1b2a 0%, #04070b 100%);
+  }
+  .overlay[hidden] { display: none; }
+  .overlay .box { max-width: 46ch; }
+  .overlay h2 { margin: 0 0 8px; font-size: 17px; font-weight: 650; }
+  .overlay p { margin: 0 0 6px; color: var(--ui-fg-dim); font-size: 13px; }
+  .overlay code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: rgba(255,255,255,.08);
+    padding: 1px 5px;
+    border-radius: 5px;
+  }
+
+  .spinner {
+    width: 34px; height: 34px;
+    margin: 0 auto 14px;
+    border: 3px solid rgba(255,255,255,.15);
+    border-top-color: var(--ui-accent);
+    border-radius: 50%;
+    animation: spin 900ms linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #error-overlay h2 { color: #ffb4a2; }
+  #error-detail {
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #8ea6b8;
+    word-break: break-word;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner { animation-duration: 3s; }
+  }
+
+  @media (max-width: 560px) {
+    .panel { width: calc(100vw - 28px); padding: 12px 13px 10px; }
+    .panel .sub { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sea" role="img" tabindex="0"
+        aria-label="Echtzeit-Darstellung einer prozedural erzeugten offenen See mit Dünung, Schaumkronen, Sonnenglitzern und Himmel."></canvas>
+
+<button id="panel-open" class="panel-toggle" type="button" aria-expanded="false" aria-controls="panel" hidden>
+  Bedienfeld einblenden
+</button>
+
+<section id="panel" class="panel" aria-labelledby="panel-title">
+  <h1 id="panel-title">Offene See — WebGPU / TSL</h1>
+  <p class="sub">Fünf Gerstner-Wellen, analytische Normalen, FBM-Kapillardetail, Bloom &amp; ACES.</p>
+
+  <div class="field">
+    <div class="row">
+      <label for="ctl-sea">Seegang</label>
+      <output id="out-sea" for="ctl-sea">4 — mäßig bewegt</output>
+    </div>
+    <input id="ctl-sea" type="range" min="0" max="100" step="1" value="45"
+           aria-describedby="out-sea">
+  </div>
+
+  <div class="field">
+    <div class="row">
+      <label for="ctl-time">Tageszeit</label>
+      <output id="out-time" for="ctl-time">10:00</output>
+    </div>
+    <input id="ctl-time" type="range" min="0" max="100" step="1" value="38"
+           aria-describedby="out-time">
+  </div>
+
+  <div class="field">
+    <div class="row">
+      <label for="ctl-drift">Drift</label>
+      <output id="out-drift" for="ctl-drift">0.35×</output>
+    </div>
+    <input id="ctl-drift" type="range" min="0" max="100" step="1" value="35"
+           aria-describedby="out-drift">
+  </div>
+
+  <div class="meta">
+    <span>FPS <strong id="fps" aria-hidden="true">–</strong></span>
+    <span id="quality">DPR 1.00</span>
+    <button id="pause" type="button" aria-pressed="false">Pause</button>
+  </div>
+
+  <p id="fps-live" class="visually-hidden" role="status" aria-live="off"></p>
+
+  <details class="help">
+    <summary>Steuerung &amp; Tastatur</summary>
+    <ul>
+      <li>Ziehen / 1 Finger: Kamera drehen</li>
+      <li>Scrollen / 2 Finger: Zoom</li>
+      <li><kbd>H</kbd>: Bedienfeld ein-/ausblenden</li>
+      <li><kbd>P</kbd> oder Leertaste: Pause</li>
+      <li>Regler mit <kbd>←</kbd>/<kbd>→</kbd> bedienbar</li>
+    </ul>
+  </details>
+
+  <div style="margin-top:8px">
+    <button id="panel-close" type="button" aria-controls="panel">Bedienfeld ausblenden</button>
+  </div>
+</section>
+
+<div id="loading-overlay" class="overlay" role="status" aria-live="polite">
+  <div class="box">
+    <div class="spinner" aria-hidden="true"></div>
+    <h2>WebGPU wird initialisiert …</h2>
+    <p>Shader werden übersetzt und das Wellengitter wird aufgebaut.</p>
+  </div>
+</div>
+
+<div id="error-overlay" class="overlay" role="alert" hidden>
+  <div class="box">
+    <h2 id="error-title">WebGPU nicht verfügbar</h2>
+    <p id="error-message">
+      Diese Szene rendert ausschließlich mit WebGPU. Es gibt bewusst keinen versteckten WebGL-Fallback.
+    </p>
+    <p>
+      Aktuelle Browser mit WebGPU: Chrome/Edge 113+, Safari 18+ (macOS 15 / iOS 18), Firefox 141+.
+      Unter Linux ggf. <code>chrome://flags/#enable-unsafe-webgpu</code> aktivieren.
+      Die Seite muss über <code>http(s)://</code> geladen werden, nicht über <code>file://</code>.
+    </p>
+    <p id="error-detail"></p>
+  </div>
+</div>
+
+<noscript>
+  <div class="overlay">
+    <div class="box">
+      <h2>JavaScript erforderlich</h2>
+      <p>Diese Echtzeit-Szene benötigt JavaScript und WebGPU.</p>
+    </div>
+  </div>
+</noscript>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.webgpu.js",
+    "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.webgpu.js",
+    "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.tsl.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="./main.js"></script>
+
+</body>
+</html>
