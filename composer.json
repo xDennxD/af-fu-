@@ -1,0 +1,19 @@
+{
+    "name": "xdennxd/fusspflege-theme",
+    "description": "Dev-Werkzeuge für das WordPress-Theme „Fußpflege One-Pager“: PHP_CodeSniffer mit WordPress Coding Standards.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf"
+    }
+}

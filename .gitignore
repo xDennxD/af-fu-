@@ -1,0 +1,14 @@
+# Lokale WordPress-Installation / Downloads (nicht Teil des Repos)
+/wp/
+/wordpress/
+*.zip
+*.phar
+
+# Logs, Umgebungsvariablen, Editor-Kram
+*.log
+.env
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+vendor/

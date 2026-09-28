@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="Fusspflege Theme">
+	<description>WordPress Coding Standards für das Theme fusspflege. Ausführen: composer install, danach composer lint</description>
+
+	<file>wp-content/themes/fusspflege</file>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- Kompletter WordPress-Standard: Core, Docs, Extra + Sicherheitsregeln (Escaping, Nonces, Sanitizing) -->
+	<rule ref="WordPress"/>
+
+	<!-- Übersetzungsfunktionen müssen unsere Text Domain nutzen -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="fusspflege"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Alle globalen Funktionen/Variablen/Hooks brauchen das Präfix "fusspflege" -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="fusspflege"/>
+			</property>
+		</properties>
+	</rule>
+
+	<config name="minimum_wp_version" value="6.4"/>
+</ruleset>

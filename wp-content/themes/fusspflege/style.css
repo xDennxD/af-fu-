@@ -1,0 +1,21 @@
+/*
+Theme Name: Fußpflege One-Pager
+Theme URI: https://github.com/xDennxD/af-fu-
+Author: xDennxD
+Author URI: https://github.com/xDennxD
+Description: Klassisches One-Pager-Theme für eine Fußpflegepraxis – konvertiert aus einem statischen HTML-Template. Alle Praxisdaten und Texte im Customizer pflegbar, Leistungen als eigener Inhaltstyp (Karten + Preistabelle), natives Kontaktformular ohne Plugin, keine externen Requests (DSGVO-freundlich).
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 7.1
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fusspflege
+Tags: one-column, custom-menu, custom-logo, featured-images, translation-ready
+*/
+
+/*
+ * Diese Datei ist PFLICHT: WordPress erkennt ein Theme nur an diesem Kommentar-Header.
+ * Das eigentliche CSS liegt in assets/css/main.css und wird in functions.php
+ * per wp_enqueue_style() geladen (mit Cache-Buster über filemtime()).
+ */
