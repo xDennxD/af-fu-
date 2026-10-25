@@ -6,7 +6,7 @@
 2. **GitHub-Issues** mit dem Label `log` (Log-Text in den Issue-Body einfügen).
 
 ## Was macht der Watcher bei jedem Lauf?
-1. Neue Logs suchen: alle Dateien in `logs/incoming/` (außer `.gitkeep`) und offene Issues mit Label `log`.
+1. Neue Logs suchen (Branch `main` und Arbeits-Branch, vorher `git fetch`): alle Dateien in `logs/incoming/` (außer `.gitkeep`) und offene Issues mit Label `log`.
 2. Keine neuen Logs → nichts tun, keine Benachrichtigung.
 3. Für jedes Log: Fehler identifizieren, Ursache im Code suchen.
 4. Entscheidung:
